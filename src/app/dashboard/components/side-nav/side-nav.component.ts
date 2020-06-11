@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavComponent implements OnInit {
 
+  links = [
+    {name: 'Invoices', url: 'invoices'},
+    {name: 'Clients', url: 'clients'}
+  ];
   constructor() { }
 
   ngOnInit() {

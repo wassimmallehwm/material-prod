@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/material.module';
 
 import { AppRoutingModule } from './app-routing.module';
-import { InvoiceBuilderComponent } from './invoice-builder/invoice-builder.component';
 
 @NgModule({
   declarations: [

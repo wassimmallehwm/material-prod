@@ -1,20 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { InvoiceBuilderComponent } from './invoice-builder/invoice-builder.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: AppComponent
-  },
-  {
-    path: 'invoice-builder',
-    loadChildren: './invoice-builder/invoice-builder.module#InvoiceBuilderModule'
+    path: 'dashboard',
+    loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
   {
     path: '**',
-    redirectTo: 'invoice-builder'
+    redirectTo: 'dashboard'
   }
 ];
 
