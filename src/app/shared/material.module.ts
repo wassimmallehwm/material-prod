@@ -1,24 +1,43 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatIconModule, MatSidenavModule, MatToolbarModule, MatListModule, MatCardModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatSidenavModule,
+  MatToolbarModule,
+  MatListModule,
+  MatCardModule,
+  MatTableModule,
+  MatMenuModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSnackBarModule} from '@angular/material';
+
+const modules = [
+  MatButtonModule,
+  MatIconModule,
+  MatSidenavModule,
+  MatToolbarModule,
+  MatListModule,
+  MatCardModule,
+  MatTableModule,
+  MatMenuModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSnackBarModule
+]
 
 @NgModule({
   imports: [
     CommonModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
-    MatCardModule
+    ...modules
   ],
   exports: [
-    MatButtonModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
-    MatCardModule
+    ...modules
   ],
   declarations: []
 })

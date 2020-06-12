@@ -1,0 +1,41 @@
+<mat-card>
+  <h3>Create Invoice</h3>
+  <form [formGroup]="form" class="form-container" novalidate (ngSubmit)="onSubmit()">
+    <mat-form-field color="accent">
+      <input matInput placeholder="Item" formControlName="item">
+      <mat-error *ngIf="form.controls.item.invalid && form.controls.item.touched">Item is required !</mat-error>
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+      <input matInput [matDatepicker]="date" placeholder="Date" formControlName="date">
+      <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+      <mat-datepicker #date></mat-datepicker>
+      <mat-error *ngIf="form.controls.date.invalid && form.controls.date.touched">Date is required !</mat-error>
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+      <input matInput [matDatepicker]="due" placeholder="Due" formControlName="due">
+      <mat-datepicker-toggle matSuffix [for]="due"></mat-datepicker-toggle>
+      <mat-datepicker #due></mat-datepicker>
+      <mat-error *ngIf="form.controls.due.invalid && form.controls.due.touched">Due date is required !</mat-error>
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+      <input matInput placeholder="Qty" type="number" formControlName="qty">
+      <mat-error *ngIf="form.controls.qty.invalid && form.controls.qty.touched">Qty is required !</mat-error>
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+      <input matInput placeholder="Tax" type="number" formControlName="tax">
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+      <input matInput placeholder="Rate" type="number" formControlName="rate">
+    </mat-form-field>
+
+    <div>
+      <button mat-raised-button [disabled]="form.invalid" type="submit" color="accent">Save</button>&nbsp;
+      <button mat-raised-button type="reset">Cancel</button>
+    </div>
+  </form>
+</mat-card>
