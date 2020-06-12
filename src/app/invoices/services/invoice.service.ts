@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Invoice } from '../models/invoice';
+import { Invoice, InvoicePageResponse } from '../models/invoice';
 import { environment } from 'src/environments/environment';
 
 const BASE_URL = environment.apiUrl + '/invoices';
@@ -17,8 +17,8 @@ export class InvoiceService {
     return this.http.post<Invoice>(BASE_URL, body);
   }
 
-  getInvoices(): Observable<Invoice[]> {
-    return this.http.get<Invoice[]>(BASE_URL);
+  getInvoices(page, perPage): Observable<InvoicePageResponse> {
+    return this.http.get<InvoicePageResponse>(BASE_URL + '?page=' + page + '&perPage=' + perPage);
   }
 
   getOne(id: string): Observable<Invoice> {

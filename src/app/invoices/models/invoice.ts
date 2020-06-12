@@ -8,3 +8,12 @@ export class Invoice {
   tax: number;
   rate: number;
 }
+
+
+export class InvoicePageResponse {
+  docs: Invoice[];
+  total: number;
+  pages: number;
+  page: number;
+  limit: number;
+}
