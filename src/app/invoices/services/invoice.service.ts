@@ -17,8 +17,15 @@ export class InvoiceService {
     return this.http.post<Invoice>(BASE_URL, body);
   }
 
-  getInvoices(page, perPage): Observable<InvoicePageResponse> {
-    return this.http.get<InvoicePageResponse>(BASE_URL + '?page=' + page + '&perPage=' + perPage);
+  getInvoices(page, perPage, sortField, sortDir, filter): Observable<InvoicePageResponse> {
+    let url = BASE_URL + '?page=' + ++page + '&perPage=' + perPage;
+    if (sortField && sortDir) {
+      url = url + '&sortField=' + sortField + '&sortDir=' + sortDir;
+    }
+    if (filter) {
+      url = url + '&filter=' + filter;
+    }
+    return this.http.get<InvoicePageResponse>(url);
   }
 
   getOne(id: string): Observable<Invoice> {

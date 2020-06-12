@@ -1,38 +1,64 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { InvoiceService } from '../../services/invoice.service';
 import { Invoice } from '../../models/invoice';
 import { Router } from '@angular/router';
-import { MatSnackBar, MatPaginator } from '@angular/material';
+import { MatSnackBar, MatPaginator, MatSort } from '@angular/material';
 
 import { remove } from 'lodash';
+import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-invoice-listing',
   templateUrl: './invoice-listing.component.html',
   styleUrls: ['./invoice-listing.component.scss']
 })
-export class InvoiceListingComponent implements OnInit {
+export class InvoiceListingComponent implements OnInit, AfterViewInit {
 
   invoices: Invoice[];
   resultLength: number;
-  displayedColumns: string[] = ['item', 'qty', 'date', 'due', 'rate', 'tax', 'action'];
+  displayedColumns: string[] = ['item', 'date', 'due', 'qty', 'rate', 'tax', 'action'];
   loader = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private invoiceService: InvoiceService,
     private router: Router,
     private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.paginator.page.subscribe(data => {
-      this.getInvoices(++data.pageIndex, data.pageSize);
-    });
-    this.getInvoices(1, 10);
+    this.initInvoices();
   }
 
-  getInvoices(page, perPage) {
+  ngAfterViewInit(){
+    this.paginator.page.subscribe(data => {
+      this.getInvoices(null);
+    });
+
+    this.sort.sortChange.subscribe(data => {
+      this.paginator.pageIndex = 0;
+      this.getInvoices(null);
+    });
+  }
+
+  initInvoices() {
     this.loader = true;
-    this.invoiceService.getInvoices(page, perPage).subscribe(result => {
+    this.invoiceService.getInvoices(0, 10, null, null, null).subscribe(result => {
+      this.invoices = result.docs;
+      this.resultLength = result.total;
+      this.loader = false;
+      console.log(this.invoices);
+    }, error => this.errorHandler(error, 'Failed to fetch Invoice !'));
+  }
+
+  getInvoices(filter) {
+    this.loader = true;
+    this.invoiceService.getInvoices(
+      this.paginator.pageIndex,
+      this.paginator.pageSize,
+      this.sort.active,
+      this.sort.direction,
+      filter)
+      .subscribe(result => {
       this.invoices = result.docs;
       this.resultLength = result.total;
       this.loader = false;
@@ -55,16 +81,22 @@ export class InvoiceListingComponent implements OnInit {
         this.snackBar.open('Invoice deleted', 'Success', {
           duration: 3000
         });
-        const removedItem = remove(this.invoices, (item) => {
-          return item._id === data._id;
-        });
-        this.invoices = [...this.invoices];
-        this.loader = false;
+        this.getInvoices(null);
+        // const removedItem = remove(this.invoices, (item) => {
+        //   return item._id === data._id;
+        // });
+        // this.invoices = [...this.invoices];
+        // this.loader = false;
       },
       error => {
         this.errorHandler(error, 'Failed to delete Invoice !');
       }
     );
+  }
+
+  filterInvoices(filterValue: any){
+    this.paginator.pageIndex = 0;
+    this.getInvoices(filterValue);
   }
 
   private errorHandler(error, message){

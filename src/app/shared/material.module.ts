@@ -15,7 +15,8 @@ import {
   MatNativeDateModule,
   MatSnackBarModule,
   MatPaginatorModule,
-  MatProgressSpinnerModule} from '@angular/material';
+  MatProgressSpinnerModule,
+  MatSortModule} from '@angular/material';
 
 const modules = [
   MatButtonModule,
@@ -32,7 +33,8 @@ const modules = [
   MatNativeDateModule,
   MatSnackBarModule,
   MatPaginatorModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatSortModule
 ]
 
 @NgModule({
