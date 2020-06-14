@@ -4,6 +4,8 @@ import { InvoiceService } from '../../services/invoice.service';
 import { MatSnackBar } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Invoice } from '../../models/invoice';
+import { ClientsService } from 'src/app/clients/services/clients.service';
+import { Client } from 'src/app/clients/models/client';
 
 @Component({
   selector: 'app-invoice-form',
@@ -15,15 +17,18 @@ export class InvoiceFormComponent implements OnInit {
   form: FormGroup;
   id: string;
   invoice: Invoice;
+  clients: Client[];
 
   constructor(private fb: FormBuilder,
     private invoiceService: InvoiceService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private clientService: ClientsService) { }
 
   ngOnInit() {
     this.buildForm();
+    this.getAllClients();
     this.setForm();
   }
 
@@ -33,9 +38,21 @@ export class InvoiceFormComponent implements OnInit {
       date: ['', Validators.required],
       due: ['', Validators.required],
       qty: ['', Validators.required],
+      client: ['', Validators.required],
       rate: '',
       tax: ''
-    })
+    });
+  }
+
+  getAllClients(){
+    this.clientService.getClients().subscribe(
+      data => {
+        this.clients = data;
+      },
+      error => {
+        this.errorHandler(error, 'Clients loading Failed !');
+      }
+    )
   }
 
   onSubmit() {

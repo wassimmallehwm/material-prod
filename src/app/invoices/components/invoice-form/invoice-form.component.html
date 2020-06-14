@@ -33,6 +33,19 @@
       <input matInput placeholder="Rate" type="number" formControlName="rate">
     </mat-form-field>
 
+    <mat-form-field color="accent">
+      <mat-select placeholder="Client" formControlName="client" required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let client of clients" [value]="client._id">
+          {{client.firstname}} {{client.lastname}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls.client.invalid && form.controls.client.touched">
+        Client is required !
+      </mat-error>
+
+    </mat-form-field>
+
     <div>
       <button mat-raised-button [disabled]="form.invalid" type="submit" color="accent">Save</button>&nbsp;
       <button mat-raised-button type="reset">Cancel</button>

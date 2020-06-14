@@ -4,8 +4,6 @@ import { Invoice } from '../../models/invoice';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatPaginator, MatSort } from '@angular/material';
 
-import { remove } from 'lodash';
-import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-invoice-listing',

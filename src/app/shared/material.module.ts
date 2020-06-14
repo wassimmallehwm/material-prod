@@ -16,7 +16,9 @@ import {
   MatSnackBarModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
-  MatSortModule} from '@angular/material';
+  MatSortModule,
+  MatDialogModule,
+  MatSelectModule} from '@angular/material';
 
 const modules = [
   MatButtonModule,
@@ -34,7 +36,9 @@ const modules = [
   MatSnackBarModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
-  MatSortModule
+  MatSortModule,
+  MatDialogModule,
+  MatSelectModule
 ]
 
 @NgModule({
