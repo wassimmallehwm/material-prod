@@ -1,0 +1,42 @@
+<div class="limiter">
+  <div class="container-login">
+    <mat-card>
+    <div class="mat-elevation-z8">
+      <div class="loading-shade" *ngIf="loader">
+        <mat-spinner color="accent" *ngIf="loader"></mat-spinner>
+      </div>
+    </div>
+      <mat-card-title>{{title}}</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="form" class="form-container" novalidate (ngSubmit)="onSubmit()">
+
+          <mat-form-field color="accent">
+            <input matInput placeholder="Email" formControlName="email">
+            <mat-error *ngIf="form.controls.email.invalid && form.controls.email.touched">
+              Email is required !
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field color="accent">
+            <input matInput placeholder="Password" formControlName="password" type="password">
+            <mat-error *ngIf="form.controls.password.invalid && form.controls.password.touched">
+              Password is required !
+            </mat-error>
+          </mat-form-field>
+
+          <div>
+            <button mat-raised-button [disabled]="form.invalid" type="submit" color="accent">{{title}}</button>
+          </div>
+        </form>
+      </mat-card-content>
+      <div class="alternative" *ngIf="title === 'Login'">
+        <p>You don't have an account ?</p>
+        <button mat-raised-button color="accent" [routerLink]="['/signup']">Signup</button>
+      </div>
+      <div class="alternative" *ngIf="title === 'Signup'">
+        <p>You already have an account ?</p>
+        <button mat-raised-button color="accent" [routerLink]="['/login']">Login</button>
+      </div>
+    </mat-card>
+  </div>
+</div>

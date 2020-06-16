@@ -18,6 +18,11 @@ import { ClientsModule } from '../clients/clients.module';
     InvoicesModule,
     ClientsModule
   ],
-  declarations: [DashboardComponent, MainContentComponent, SideNavComponent, ToolbarComponent]
+  declarations: [
+    DashboardComponent,
+    MainContentComponent,
+    SideNavComponent,
+    ToolbarComponent
+  ]
 })
 export class DashboardModule { }

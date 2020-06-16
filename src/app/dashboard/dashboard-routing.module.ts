@@ -5,31 +5,38 @@ import { MainContentComponent } from './components/main-content/main-content.com
 import { InvoiceListingComponent } from '../invoices/components/invoice-listing/invoice-listing.component';
 import { ClientListingComponent } from '../clients/components/client-listing/client-listing.component';
 import { InvoiceFormComponent } from '../invoices/components/invoice-form/invoice-form.component';
+import { AuthGuardGuard } from '../core/guards/auth-guard.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
+    canActivate: [AuthGuardGuard],
     children: [
       {
         path: 'invoices',
-        component: InvoiceListingComponent
+        component: InvoiceListingComponent,
+        canActivateChild: [AuthGuardGuard]
       },
       {
         path: 'invoices/new',
-        component: InvoiceFormComponent
+        component: InvoiceFormComponent,
+        canActivateChild: [AuthGuardGuard]
       },
       {
         path: 'invoices/:id',
-        component: InvoiceFormComponent
+        component: InvoiceFormComponent,
+        canActivateChild: [AuthGuardGuard]
       },
       {
         path: 'clients',
-        component: ClientListingComponent
+        component: ClientListingComponent,
+        canActivateChild: [AuthGuardGuard]
       },
       {
         path: '**',
-        redirectTo: 'invoices'
+        redirectTo: 'invoices',
+        canActivateChild: [AuthGuardGuard]
       }
     ]
   },

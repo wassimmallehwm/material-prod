@@ -3,4 +3,16 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span>Invoice Builder</span>
+  <div class="menu-bar">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button (click)="logout()" mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
+
 </mat-toolbar>

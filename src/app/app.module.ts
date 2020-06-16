@@ -5,7 +5,10 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/material.module';
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthModule } from './auth/auth.module';
+import { CoreModule } from './core/core.module';
+import { HttpInterceptorService } from './core/services/http-interceptor';
 
 @NgModule({
   declarations: [
@@ -16,9 +19,17 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthModule,
+    CoreModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : HttpInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

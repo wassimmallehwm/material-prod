@@ -18,6 +18,7 @@ export class InvoiceFormComponent implements OnInit {
   id: string;
   invoice: Invoice;
   clients: Client[];
+  title = 'New Invoice';
 
   constructor(private fb: FormBuilder,
     private invoiceService: InvoiceService,
@@ -98,6 +99,7 @@ export class InvoiceFormComponent implements OnInit {
   private setForm() {
     this.route.params.subscribe(params => {
       if(params['id']) {
+        this.title = 'Edit Invoice';
         this.id = params['id'];
         this.invoiceService.getOne(this.id).subscribe(
           data => {
