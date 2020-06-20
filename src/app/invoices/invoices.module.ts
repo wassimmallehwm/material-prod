@@ -5,6 +5,8 @@ import { MaterialModule } from '../shared/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { InvoiceFormComponent } from './components/invoice-form/invoice-form.component';
+import { InvoiceViewComponent } from './components/invoice-view/invoice-view.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -12,9 +14,10 @@ import { InvoiceFormComponent } from './components/invoice-form/invoice-form.com
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
-  declarations: [InvoiceListingComponent, InvoiceFormComponent],
+  declarations: [InvoiceListingComponent, InvoiceFormComponent, InvoiceViewComponent],
   exports: [
     InvoiceListingComponent,
     InvoiceFormComponent

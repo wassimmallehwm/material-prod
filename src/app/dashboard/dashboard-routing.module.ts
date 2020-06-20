@@ -6,6 +6,7 @@ import { InvoiceListingComponent } from '../invoices/components/invoice-listing/
 import { ClientListingComponent } from '../clients/components/client-listing/client-listing.component';
 import { InvoiceFormComponent } from '../invoices/components/invoice-form/invoice-form.component';
 import { AuthGuardGuard } from '../core/guards/auth-guard.guard';
+import { InvoiceViewComponent } from '../invoices/components/invoice-view/invoice-view.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,11 @@ const routes: Routes = [
       {
         path: 'invoices/new',
         component: InvoiceFormComponent,
+        canActivateChild: [AuthGuardGuard]
+      },
+      {
+        path: 'invoices/:id/view',
+        component: InvoiceViewComponent,
         canActivateChild: [AuthGuardGuard]
       },
       {

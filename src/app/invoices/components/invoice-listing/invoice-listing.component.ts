@@ -14,7 +14,7 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
 
   invoices: Invoice[];
   resultLength: number;
-  displayedColumns: string[] = ['item', 'date', 'due', 'qty', 'rate', 'tax', 'action'];
+  displayedColumns: string[] = ['item', 'date', 'due', 'action'];
   loader = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -44,7 +44,6 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
       this.invoices = result.docs;
       this.resultLength = result.total;
       this.loader = false;
-      console.log(this.invoices);
     }, error => this.errorHandler(error, 'Failed to fetch Invoice !'));
   }
 
@@ -60,7 +59,6 @@ export class InvoiceListingComponent implements OnInit, AfterViewInit {
       this.invoices = result.docs;
       this.resultLength = result.total;
       this.loader = false;
-      console.log(this.invoices);
     }, error => this.errorHandler(error, 'Failed to fetch Invoice !'));
   }
 

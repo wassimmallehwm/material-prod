@@ -104,7 +104,19 @@ export class InvoiceFormComponent implements OnInit {
         this.invoiceService.getOne(this.id).subscribe(
           data => {
             this.invoice = data;
-            this.form.patchValue(this.invoice);
+            if(this.invoice.client){
+              this.form.patchValue({
+                client: this.invoice.client._id
+              });
+            }
+            this.form.patchValue({
+              item: this.invoice.item,
+              qty: this.invoice.qty,
+              date: this.invoice.date,
+              due: this.invoice.due,
+              rate: this.invoice.rate,
+              tax: this.invoice.tax
+            });
           },
           error => {
             this.errorHandler(error, 'Failed to get Invoice');

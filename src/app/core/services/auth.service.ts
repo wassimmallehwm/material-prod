@@ -38,5 +38,9 @@ export class AuthService {
     return this.http.get<LogoutResponse>(BASE_URL + '/auth/logout');
   }
 
+  refreshToken(): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(USER_BASE_URL + '/refresh', null);
+  }
+
 
 }
