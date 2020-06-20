@@ -14,3 +14,7 @@ export class SignupResponse {
   success: boolean;
   message: string;
 }
+
+export class LogoutResponse {
+  success : boolean;
+}

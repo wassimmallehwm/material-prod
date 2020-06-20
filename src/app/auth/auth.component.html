@@ -25,13 +25,21 @@
           </mat-form-field>
 
           <div>
-            <button mat-raised-button [disabled]="form.invalid" type="submit" color="accent">{{title}}</button>
+            <button mat-raised-button [disabled]="form.invalid" class="btn-block" type="submit" color="accent">{{title}}</button>
+            <a [href]="googleLoginUrl" class="btn btn-social btn-block btn-google" mat-button>
+              <i class="fab fa-google-plus-g"></i>
+              Login with Google
+            </a>
+            <a [href]="fbLoginUrl" class="btn btn-social btn-block btn-facebook" mat-button>
+              <i class="fab fa-facebook-square"></i>
+              Login with Facebook
+            </a>
           </div>
         </form>
       </mat-card-content>
       <div class="alternative" *ngIf="title === 'Login'">
         <p>You don't have an account ?</p>
-        <button mat-raised-button color="accent" [routerLink]="['/signup']">Signup</button>
+        <button mat-raised-button color="accent" class="btn-block" [routerLink]="['/signup']">Signup</button>
       </div>
       <div class="alternative" *ngIf="title === 'Signup'">
         <p>You already have an account ?</p>

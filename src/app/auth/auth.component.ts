@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
 import { JwtService } from '../core/services/jwt.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-auth',
@@ -15,6 +16,8 @@ export class AuthComponent implements OnInit {
   form: FormGroup;
   title = '';
   loader = false;
+  fbLoginUrl = environment.apiUrl + '/auth/facebook';
+  googleLoginUrl = environment.apiUrl + '/auth/google';
 
   constructor(private fb: FormBuilder,
     private snackBar: MatSnackBar,
