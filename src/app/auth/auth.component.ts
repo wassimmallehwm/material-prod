@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
 import { JwtService } from '../core/services/jwt.service';
 import { environment } from 'src/environments/environment';
+import { User } from '../core/models/user';
 
 @Component({
   selector: 'app-auth',
@@ -33,6 +34,7 @@ export class AuthComponent implements OnInit {
   buildForm(){
     this.form = this.fb.group({
       email: ['', Validators.required],
+      name: '',
       password: ['', Validators.required]
     });
   }
@@ -47,7 +49,10 @@ export class AuthComponent implements OnInit {
   }
 
   private login() {
-    this.authService.login(this.form.value).subscribe(
+    const user = new User();
+    user.email = this.form.value.email;
+    user.password = this.form.value.password;
+    this.authService.login(user).subscribe(
       data => {
         this.jwtService.setToken(data.token);
         this.router.navigate(['dashboard', 'invoices']);

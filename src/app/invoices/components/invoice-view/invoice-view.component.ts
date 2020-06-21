@@ -4,6 +4,7 @@ import { InvoiceService } from '../../services/invoice.service';
 import { MatSnackBar } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientsService } from 'src/app/clients/services/clients.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-invoice-view',
@@ -16,6 +17,7 @@ export class InvoiceViewComponent implements OnInit {
   invoice: Invoice;
   loader = true;
   total: number;
+  isFileLoading = false;
 
   constructor(
     private invoiceService: InvoiceService,
@@ -56,12 +58,26 @@ export class InvoiceViewComponent implements OnInit {
     })
   }
 
+  download(id){
+    this.isFileLoading = true;
+    this.invoiceService.download(id).subscribe(
+      data => {
+        saveAs(data, this.invoice.item.replace(' ', '_'));
+        this.isFileLoading = false;
+      },
+      error => {
+        this.errorHandler(error, 'Failed to download Invoice');
+      }
+    )
+  }
+
   edit(id){
     this.router.navigate(['dashboard', 'invoices', id]);
   }
 
   private errorHandler(error, message){
     console.log(error);
+    this.isFileLoading = false;
     this.loader = false;
     this.snackBar.open(message, 'Error', {
       duration: 3000

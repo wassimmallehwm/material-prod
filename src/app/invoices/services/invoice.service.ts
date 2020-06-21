@@ -39,4 +39,8 @@ export class InvoiceService {
   delete(id: string): Observable<Invoice> {
     return this.http.delete<Invoice>(BASE_URL + '/' + id);
   }
+
+  download(id: string) {
+    return this.http.get(BASE_URL + '/' + id + '/download', {responseType: 'blob'});
+  }
 }
