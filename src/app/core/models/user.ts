@@ -19,3 +19,7 @@ export class SignupResponse {
 export class LogoutResponse {
   success : boolean;
 }
+
+export class ForgotPasswordResponse {
+  message: string;
+}

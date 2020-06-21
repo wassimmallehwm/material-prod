@@ -42,19 +42,6 @@ export class AuthGuardGuard implements CanActivate, CanActivateChild {
         })
       );
     }
-    // if (token) {
-    //   return this.authService.isAuthenticated(token).pipe(
-    //     map((authenticated) => {
-    //       if (authenticated) {
-    //         this.jwtService.setToken(token);
-    //         return true;
-    //       } else {
-    //         this.router.navigate(['login']);
-    //         return false;
-    //       }
-    //     })
-    //   )
-    // }
 
     this.router.navigate(['login']);
     return of(false);

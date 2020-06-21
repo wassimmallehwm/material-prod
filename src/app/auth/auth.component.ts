@@ -81,6 +81,10 @@ export class AuthComponent implements OnInit {
     );
   }
 
+  forgotPassword(){
+    this.router.navigate(['forgot-password']);
+  }
+
   private errorHandler(error, message){
     console.log(error);
     this.loader = false;

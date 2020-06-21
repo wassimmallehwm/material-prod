@@ -4,6 +4,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { NoAuthGuardGuard } from './core/guards/no-auth-guard.guard';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -14,6 +16,16 @@ const routes: Routes = [
   {
     path: 'signup',
     component: AuthComponent,
+    canActivate: [NoAuthGuardGuard]
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
+    canActivate: [NoAuthGuardGuard]
+  },
+  {
+    path: 'reset-password/:token',
+    component: ResetPasswordComponent,
     canActivate: [NoAuthGuardGuard]
   },
   {

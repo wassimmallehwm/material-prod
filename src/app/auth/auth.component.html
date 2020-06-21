@@ -33,6 +33,8 @@
 
           <div>
             <button mat-raised-button [disabled]="form.invalid" class="btn-block" type="submit" color="accent">{{title}}</button>
+            <a *ngIf="title === 'Login'" class="btn btn-block btn-forgot" (click)="forgotPassword()">Forgot password</a>
+
             <a [href]="googleLoginUrl" class="btn btn-social btn-block btn-google" mat-button>
               <i class="fab fa-google-plus-g"></i>
               Login with Google

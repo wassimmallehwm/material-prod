@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User, LoginResponse, SignupResponse, LogoutResponse } from '../models/user';
+import { User, LoginResponse, SignupResponse, LogoutResponse, ForgotPasswordResponse } from '../models/user';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -22,15 +22,15 @@ export class AuthService {
     return this.http.post<SignupResponse>(USER_BASE_URL + '/signup', body);
   }
 
-  // googleAuth(): Observable<LoginResponse> {
-  //   return this.http.get<LoginResponse>(BASE_URL + '/auth/google');
-  // }
-
   isAuthenticated(token: any): Observable<boolean> {
-    const header: HttpHeaders = new HttpHeaders();
-    header.append('Content-Type', 'application/json');
-    header.append('Authorization', 'Bearer ' + token);
-    const options = {headers: header};
+    const headers: HttpHeaders = new HttpHeaders({
+      'skip' : 'true',
+      'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer ' + token
+    });
+    const options = {
+      headers : headers
+    }
     return this.http.get<boolean>(BASE_URL + '/auth/authenticate', options);
   }
 
@@ -40,6 +40,26 @@ export class AuthService {
 
   refreshToken(): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(USER_BASE_URL + '/refresh', null);
+  }
+
+  forgotPassword(body): Observable<ForgotPasswordResponse> {
+    return this.http.post<ForgotPasswordResponse>(USER_BASE_URL + '/forgot-password', body);
+  }
+
+  resetPassword(body): Observable<ForgotPasswordResponse> {
+    const headers: HttpHeaders = new HttpHeaders({
+      'skip' : 'true',
+      'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer ' + body.token
+    });
+    const options = {
+      headers : headers
+    }
+    return this.http.put<ForgotPasswordResponse>(
+      USER_BASE_URL + '/reset-password',
+      {password: body.password},
+      options
+    );
   }
 
 
